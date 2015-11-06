@@ -1,0 +1,19 @@
+<tr class="nested-fields">
+  <td>
+    <%= f.label '檔案名稱' %>
+    <%= f.text_field :photo_name %><br><br>
+    <%= f.file_field :photo_file %>
+    <%= f.hidden_field :photo_file_cache, value: f.object.photo_file_cache %>
+  </td>
+  <td class="thumb">
+    <% unless f.object.new_record? %>
+    <%# image_tag(f.object.photo_file.url(:small)) %>
+    <%= link_to(image_tag(f.object.photo_file.url(:small)), f.object.photo_file.url) %>
+    <% end %>
+  </td>
+  <td>
+    <% unless f.object.new_record? %>
+      <%= link_to_remove_association "刪除", f %>
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Blogs</h1>
+
+<table border=1 cellpadding=3 cellspacing=0>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Photo</th>
+      <th>照片張數</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @blogs.each do |blog| %>
+      <tr>
+        <td><%= blog.title %></td>
+        <td><%= truncate(blog.content, length: 30, ommision: '...') %></td>
+        <td align=center><%= blog.photos.present? ? image_tag(blog.photos.first.photo_file.thumb.url) : image_tag('/default.jpg', style: 'height: 60px; width: 60xp;') %></td>
+        <td align=center><%= blog.photos_count.present? ? "#{blog.photos_count}張" : "無" %></td>
+        <td><%= link_to 'Show', blog %>
+        <%= link_to 'Edit', edit_blog_path(blog) %>
+        <%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Blog', new_blog_path %>
